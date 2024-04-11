@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peak Kaisen Calculator</title>
+<link rel="icon" type="image/png" href="Pictures/faviconjjk.jpg">
+</head>
+<body>
+<div class="container">
+  <h1>PEAK KAISEN</h1>
+  <button id="toggle-mode">Toggle Mode</button>
+  <button id="increase-font">Increase Font Size</button>
+  <button id="decrease-font">Decrease Font Size</button>
+  <div id="calculator">
+    <h2 style="grid-column: 1 / span 4; text-align: center;">"Nah id win"</h2>
+    <input type="text" id="display" readonly style="grid-column: 1 / span 4;">
+    <button onclick="addToDisplay('1')">1</button>
+    <button onclick="addToDisplay('2')">2</button>
+    <button onclick="addToDisplay('3')">3</button>
+    <button onclick="addToDisplay('+')">+</button>
+    <button onclick="addToDisplay('4')">4</button>
+    <button onclick="addToDisplay('5')">5</button>
+    <button onclick="addToDisplay('6')">6</button>
+    <button onclick="addToDisplay('-')">-</button>
+    <button onclick="addToDisplay('7')">7</button>
+    <button onclick="addToDisplay('8')">8</button>
+    <button onclick="addToDisplay('9')">9</button>
+    <button onclick="addToDisplay('*')">*</button>
+    <button onclick="addToDisplay('0')">0</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="addToDisplay('/')">/</button>
+  </div>
+</div>
+
+
+<style>
+  body {
+      font-family: 'Papyrus', sans-serif;
+      transition: background-color 0.3s ease;
+      background-color: #f8f8f8;
+      color: #333;
+      background-image: url(Pictures/gojoop.jpg);
+  }
+  
+  .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Papyrus', sans-serif;
+  }
+  
+  h1 {
+      text-align: center;
+      color: #D6D6D6;
+  }
+  
+  button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 40px;
+      background-color: #22A7F0; /* Gojo theme */
+      color: white;
+      transition: background-color 0.3s ease;
+      font-family: 'Papyrus', sans-serif;
+  }
+  
+  #calculator {
+      margin-top: 20px;
+      background-color: #222222; /* Sukuna theme */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      color: #D6D6D6; /* Set default text color */
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+      font-family: 'Papyrus', sans-serif;
+  }
+  
+  /* Adjust text color in dark mode */
+  .container.dark-mode #calculator {
+      color: #FFFFFF;
+      background-color: #D32F2F; /* Sukuna theme darker */
+  }
+  
+  @keyframes toggleCalculatorDarkMode {
+      0% {
+          background-color: #FFFFFF;
+          color: #333333;
+      }
+      50% {
+          background-color: #555555;
+          color: #CCCCCC;
+      }
+      100% {
+          background-color: #222222;
+          color: #D6D6D6;
+      }
+  }
+  .container.dark-mode #calculator {
+      animation: toggleCalculatorDarkMode 1s ease;
+  }
+  
+  </style>
+
+
+<script>
+  let darkMode = false;
+  let fontSize = 16;
+  const display = document.getElementById('display');
+
+  document.getElementById('toggle-mode').addEventListener('click', function() {
+    darkMode = !darkMode;
+    updateStyles();
+  });
+
+  document.getElementById('increase-font').addEventListener('click', function() {
+    fontSize += 2;
+    updateStyles();
+  });
+
+  document.getElementById('decrease-font').addEventListener('click', function() {
+    fontSize = Math.max(10, fontSize - 2);
+    updateStyles();
+  });
+
+  function updateStyles() {
+    if (darkMode) {
+      document.querySelector('.container').classList.add('dark-mode');
+    } else {
+      document.querySelector('.container').classList.remove('dark-mode');
+    }
+    document.body.style.fontSize = fontSize + 'px';
+  }
+
+  function addToDisplay(value) {
+    display.value += value;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch(error) {
+      display.value = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>
